@@ -4,6 +4,8 @@ import static com.griddynamics.reactive_paradigm_capstone.config.PropagationConf
 
 import com.griddynamics.reactive_paradigm_capstone.util.RequestIdGenerator;
 import java.util.Optional;
+
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.server.WebFilter;
@@ -11,15 +13,12 @@ import org.springframework.web.server.WebFilterChain;
 import reactor.core.publisher.Mono;
 
 @Component
+@RequiredArgsConstructor
 public class RequestIdFilter implements WebFilter {
 
     private static final String REQUEST_ID_HEADER = "requestId";
 
     private final RequestIdGenerator idGenerator;
-
-    public RequestIdFilter(RequestIdGenerator idGenerator) {
-        this.idGenerator = idGenerator;
-    }
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
